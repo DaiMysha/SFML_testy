@@ -4,13 +4,23 @@
 
 #include "Player.hpp"
 
+#define WIDTH   640
+#define HEIGHT  480
+
 int main(int argc, char** argv) {
 
-    sf::RenderWindow window(sf::VideoMode(640, 480), "SFML testy");
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML testy");
     sf::CircleShape shape(15.f);
     shape.setFillColor(sf::Color::Blue);
 
-    Player p(640/2,480/2,5);
+    //bg
+    sf::Texture bg;
+    if(!bg.loadFromFile("data/background.png")) exit(-1);
+    bg.setRepeated(true);
+    sf::Sprite bgSpr(bg);
+    bgSpr.setTextureRect(sf::IntRect(0,0,WIDTH,HEIGHT));
+
+    Player p(WIDTH/2,HEIGHT/2,5);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -33,7 +43,11 @@ int main(int argc, char** argv) {
         shape.setPosition(p.get_x(),p.get_y());
         //draw
         window.clear();
+
+
+        window.draw(bgSpr);
         window.draw(shape);
+
         window.display();
 
         sf::sleep(sf::milliseconds(16));
