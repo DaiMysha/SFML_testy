@@ -33,6 +33,7 @@
 					<Add library="jpeg" />
 					<Add library="gdi32" />
 					<Add library="winmm" />
+					<Add library="freetype" />
 				</Linker>
 			</Target>
 		</Build>
