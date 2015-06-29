@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
+#include <GL/gl.h>
 
 #include "Player.hpp"
 
@@ -10,17 +11,18 @@
 int main(int argc, char** argv) {
 
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "SFML testy");
-    sf::CircleShape shape(15.f);
+    sf::CircleShape shape(12.f);
     shape.setFillColor(sf::Color::Blue);
 
     //bg
     sf::Texture bg;
-    if(!bg.loadFromFile("data/background.png")) exit(-1);
-    bg.setRepeated(true);
+    if(!bg.loadFromFile("data/map.png")) exit(-1);
+    //bg.setRepeated(true);
     sf::Sprite bgSpr(bg);
     bgSpr.setTextureRect(sf::IntRect(0,0,WIDTH,HEIGHT));
 
-    Player p(WIDTH/2,HEIGHT/2,5);
+    Player p(1670,2088,2);
+    shape.setPosition(WIDTH/2-2,HEIGHT/2-2);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -40,11 +42,12 @@ int main(int argc, char** argv) {
         }
 
         p.move();
-        shape.setPosition(p.get_x(),p.get_y());
+        //calculates where the sprite has to be blit
+        int x = p.get_x() - WIDTH/2;
+        int y = p.get_y() - HEIGHT/2;
+        bgSpr.setTextureRect(sf::IntRect(x,y,x+WIDTH,y+WIDTH));
         //draw
         window.clear();
-
-
         window.draw(bgSpr);
         window.draw(shape);
 
