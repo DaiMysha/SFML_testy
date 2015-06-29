@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 
     sf::Font font;
 
-    if(!font.loadFromFile("Sweet Cheeks.ttf")) exit(-1); //because yes
+    if(!font.loadFromFile("data/Sweet Cheeks.ttf")) exit(-1); //because yes
 
     sf::Text text;
     text.setFont(font);
