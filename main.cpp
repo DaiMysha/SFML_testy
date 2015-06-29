@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include <SFML/Graphics.hpp>
 #include <GL/gl.h>
@@ -7,6 +8,8 @@
 
 #define WIDTH   640
 #define HEIGHT  480
+
+//font taken from http://www.fontspace.com/melifonts/sweet-cheeks
 
 int main(int argc, char** argv) {
 
@@ -23,6 +26,21 @@ int main(int argc, char** argv) {
 
     Player p(1670,2088,2);
     shape.setPosition(WIDTH/2-2,HEIGHT/2-2);
+
+    int fps = 0;
+    int elapsedFrames = 0;
+    sf::Clock clock, pclock;
+
+    sf::Font font;
+
+    if(!font.loadFromFile("Sweet Cheeks.ttf")) exit(-1); //because yes
+
+    sf::Text text;
+    text.setFont(font);
+    text.setCharacterSize(18);
+    text.setPosition(580,10);
+    text.setString("0");
+    text.setColor(sf::Color::White);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -41,7 +59,10 @@ int main(int argc, char** argv) {
             }
         }
 
-        p.move();
+        if(pclock.getElapsedTime().asMilliseconds() > 16) {
+            p.move();
+            pclock.restart();
+        }
         //calculates where the sprite has to be blit
         int x = p.get_x() - WIDTH/2;
         int y = p.get_y() - HEIGHT/2;
@@ -50,10 +71,21 @@ int main(int argc, char** argv) {
         window.clear();
         window.draw(bgSpr);
         window.draw(shape);
+        window.draw(text);
 
         window.display();
 
-        sf::sleep(sf::milliseconds(16));
+        //sf::sleep(sf::milliseconds(16));
+        ++elapsedFrames;
+        if(clock.getElapsedTime().asMilliseconds() > 500) {
+            fps = elapsedFrames;
+            elapsedFrames = 0;
+            clock.restart();
+            //for some reason my compiler doesn't find to_string so..
+            std::ostringstream str;
+            str << (fps*2);
+            text.setString(str.str());
+        }
     }
 
     return 0;
