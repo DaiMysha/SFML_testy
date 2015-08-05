@@ -38,7 +38,9 @@ int main(int argc, char** argv) {
 
     sf::RectangleShape p(sf::Vector2f(10,10));
     p.setFillColor(sf::Color::Blue);
-    p.setPosition(sf::Vector2f(500,415));
+    p.setPosition(sf::Vector2f(1670,2088));
+
+    int speed = 5;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -53,19 +55,19 @@ int main(int argc, char** argv) {
                     } break;
                     case sf::Keyboard::Up :
                     {
-                        p.move(0,-10);
+                        p.move(0,-speed);
                     } break;
                     case sf::Keyboard::Down :
                     {
-                        p.move(0,10);
+                        p.move(0,speed);
                     } break;
                     case sf::Keyboard::Left :
                     {
-                        p.move(-10,0);
+                        p.move(-speed,0);
                     } break;
                     case sf::Keyboard::Right :
                     {
-                        p.move(10,0);
+                        p.move(speed,0);
                     } break;
                     default: break;
                 }
