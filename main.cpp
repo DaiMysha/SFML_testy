@@ -4,8 +4,6 @@
 #include <SFML/Graphics.hpp>
 #include <GL/gl.h>
 
-#include "Player.hpp"
-
 #define WIDTH   640
 #define HEIGHT  480
 
