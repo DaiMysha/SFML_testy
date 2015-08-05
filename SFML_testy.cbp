@@ -48,8 +48,6 @@
 			<Add library="jpeg" />
 			<Add directory="P:/Program Files (x86)/CodeBlocks/MinGW/downloaded/SFML-2.3/lib" />
 		</Linker>
-		<Unit filename="Player.cpp" />
-		<Unit filename="Player.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

@@ -79,8 +79,8 @@ int main(int argc, char** argv) {
 
             sf::View baseView = window.getView();
             view.setCenter(p.getPosition());
-            window.setView(view);
             window.draw(bgSpr);
+            window.setView(view);
             window.draw(p);
             window.setView(baseView);
         }
